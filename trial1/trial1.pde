@@ -1,12 +1,12 @@
 //canvas size
 //640px wide by 480px tall
 //this is a commonly used dimension
-int al = 150;
-int ar = 150;
+int aLeft = 150;
+int aRight = 150;
 int b = 185;
 int c = 100;
 int d = 100;
-int i = 1;
+int trialNumber = 1;
 int centerX;
 int centerY;
 //setup is stuff that happens only one, draw happens
@@ -18,19 +18,18 @@ void setup() {
 
 
   //initialize variables, after setting canvas size
-   centerX = width/2;
-   centerY = height/2;
-  println(centerX);
-  println(centerY);
-
+  centerX = width/2;
+  centerY = height/2;
+ // println(centerX);
+  //println(centerY);
 }
 
 void draw() {
   background(139, 139, 139);
-  
-    //cross using a variable to position relative to center
+
+  //cross using a variable to position relative to center
   stroke(0);
-  strokeWeight(4);
+  strokeWeight(3);
   line (centerX, centerY + 40, centerX, centerY-40);
   line(centerX - 40, centerY, centerX + 40, centerY);
 
@@ -41,18 +40,19 @@ void draw() {
   //if (keyPressed == false)
   //left rectangle
   fill(255, 255, 255);
-  rect(al-20, b, c, d);
-  //rect(centerX - 20, centerY + 50, 100, 100);
+  rect(aLeft - 20, b, c, d);
+  //rect(centerX - 130, centerY + 50, 100, 100);
+  //rect(centerX + 130, centerY + 50, 100, 100);
 
 
   //outer right rectangle
   fill(255, 255, 255);
-  rect(ar + 250, b, c, d);
+  rect(aRight + 250, b, c, d);
 
-if (mousePressed == true){
-  noStroke();
-  fill(139, 139, 139);
-  rect(425, 210,50,50);
+  if (mousePressed == true) {
+    noStroke();
+    fill(139, 139, 139);
+    rect(425, 210, 50, 50);
   }
 
 
@@ -60,12 +60,11 @@ if (mousePressed == true){
   PFont myFont = createFont("Arial", 24);
   textFont(myFont);
   textAlign(LEFT, CENTER);
-  fill(0, 0, 255);
+   //blue fill for the text
+   fill(0, 0, 255);
   //text("string", x coordinate, y coordinate);
 
-  text("Trial Number " + i +" : ", 15, 25);
-
-  
+  text("Trial Number " + trialNumber +" : ", 15, 25);
 }
 
 
@@ -77,14 +76,14 @@ void keyPressed() {
   setup();
 
   if (key == 'y' || key == 'Y') {
-    i = i + 1;
+    trialNumber += 1;
   }
 
   if (key == 's' || key == 'S') {
     //move the squares further apart
 
-    ar = ar + 20;
-    al = al - 20;
+    aRight += 20;
+    aLeft -= 20;
     //left rectangle
     //     rect(x-40, 185, 100, 100);
     //rect(centerX - 20, centerY + 50, 100, 100);
@@ -95,8 +94,8 @@ void keyPressed() {
 
   if (key == 'a' || key == 'A') {
     //move the squares closer together
-    ar = ar - 20;
-    al = al + 20;
+    aRight -= 20;
+    aLeft +=  20;
 
     //  setup();
     //left rectangle
@@ -111,11 +110,17 @@ void keyPressed() {
 
   if (key == 'Q' || key == 'q') {
     setup();
-    al = 150;
-    ar = 150;
-    i = 1;
+    aLeft = 150;
+    aRight = 150;
+    trialNumber = 1;
   }
 }
+
+//use push and pop when you are making a lot of style changes
+//that will only apply to one shape:
+// pushStyle(); pushes instructions down in stack
+// popStyle(); removes instructions from the stack
+
 
 //inner right rectangle
 
