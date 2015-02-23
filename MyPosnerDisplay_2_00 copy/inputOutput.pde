@@ -2,14 +2,11 @@ void keyPressed() {
   
   if (key == '1'){
     // int passedTime = millis() - savedTime;
-    savedTime = millis();
-  
      drawLeftProbeBool = true;
  }
   
   
   if (key == '2'){
-    savedTime = millis();
   //  int passedTime = millis() - savedTime;
     drawRightProbeBool = true;
   }
@@ -39,12 +36,10 @@ void keyPressed() {
   }
   
   if (key == 'c'){
-     savedTime = millis();
-     showArrow = true;
-  
-   pickDirection();
-   // int passedTime = millis() - savedTime;
-  //  println(arrowDirection);
+    showArrow = true;
+    pickDirection();
+    int passedTime = millis() - savedTime;
+    println(arrowDirection);
 }
 
 
@@ -72,9 +67,9 @@ void keyPressed() {
     popStyle();
     }
     
-    if ((drawLeftProbeBool == false) && (drawRightProbeBool == false)){
-      setLateMessage();
-    }
+    //if ((drawLeftProbeBool == false) && (drawRightProbeBool == false)){
+      // setLateMessage();
+    //}
   
   }
 

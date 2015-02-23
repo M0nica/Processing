@@ -19,17 +19,8 @@ void drawRightArrow() {
     line(centerX + 20, centerY, centerX, centerY - 10);
   }
 
-void setLateMessage() {
-   passedTime = millis() - savedTime;
-   
-  //if(passedTime <= totalTime){
-   lateMessage = true; 
-   //pickDirection();
- //  }
-   if(passedTime >= totalTime) {
-     lateMessage = false;
-      }
-   
+//void setLateMessage() {
   
+  //lateMessage = true; 
  
-}
+//}

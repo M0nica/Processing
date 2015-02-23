@@ -2,12 +2,8 @@
 //640px wide by 480px tall
 //this is a commonly used dimension
 
-//consider creating one function that determines the seperation between 
-//the rectangles as opposed to right vs. left
-
 int aLeft = 150;
 int aRight = 150;
-
 int b = 185;
 int c = 100;
 int d = 100;
@@ -16,9 +12,6 @@ int trialNumber = 1;
 
 int centerX;
 int centerY;
-
-
-int totalTime;
 
 int startLeftProbe;
 int endLeftProbe;
@@ -29,8 +22,6 @@ int endLeftRT;
 
 int arrowDirection; 
 
-//all ints, declare the same for Right
-
 int startRightProbe;
 int endRightProbe;
 int rightProbeDuration;
@@ -38,20 +29,21 @@ int rightRT;
 int startRightRT;
 int endRightRT;
 
-int startTime = millis();
-   int passedTime = millis() - startTime;
-   int x = 150;
+int totalTime = 5000;
+
+int x = 150;
   
-
-int durationRT;
+//int durationRT;
 int now;
+int passedTime;
 
+int savedTime; 
 
+boolean lateMessage;
 boolean showArrow;
 boolean drawLeftProbeBool;
 boolean drawRightProbeBool;
- //boolean probeVisiblity = false;
-  //Timer timer;
+
 
 //setup is stuff that happens only one, draw happens
 //again and again in a loop (forever)
@@ -62,53 +54,16 @@ void setup() {
   //initialize variables, after setting canvas size
   centerX = width/2;
   centerY = height/2;
-  
-  //startTime = millis();
-  totalTime = 2000;
-  int duration;
-  
-  drawLeftProbeBool = false;
- drawRightProbeBool = false;
-  
- // probeVisiblity = false;
- // println(centerX);
-  //println(centerY);
+  savedTime = millis();
+  lateMessage = false; 
 }
 
-
-//    void rightP (){
-//     if (keyPressed == true && key == '1'){
-//        int startTime = millis();
-//        int passedTime = millis() - startTime;
-//         while (passedTime < totalTime){
-//         noStroke();
-//         fill(139, 139, 139);
-//         rect(295, 80, 50, 50);
-//         drawRightProbeBool = false;
-//         println("testing rightP");
-//         }
-//
-//    }
-//}
-
-//void leftP (){
-//if (keyPressed == true && key == '2'){
-//   int passedTime = millis() - startTime;
-//         while (passedTime < totalTime){
-//          fill(139, 139, 139);
-//          rect(425, 210, 50, 50);
-//          drawLeftProbeBool = false;
-//               println("testing leftP");
-//         }
-//
-//}}
 
 void draw() {
   background(139, 139, 139);
   
   if(showArrow)
   {
-    //println("show something on print line");
     if (arrowDirection == 0) {
       drawLeftArrow();
     }
@@ -118,6 +73,23 @@ void draw() {
     }
   }
   
+  
+  
+  
+if ((drawLeftProbeBool == false) && (drawRightProbeBool == false)){
+     lateMessage = true;
+   }
+    
+  if(lateMessage){
+  PFont mFont = createFont("Arial", 24);
+  textFont(mFont);
+  textAlign(LEFT, CENTER);
+   //blue fill for the text
+   fill(0, 0, 255);
+  //text("string", x coordinate, y coordinate);
+  text("Too late!", 35, 45);
+
+  }
   //keyPressed();
   //when pressing C. 
   //draw arrow start = now
@@ -125,18 +97,9 @@ void draw() {
   // arrow fixation duration =22000;
 
  
- //if notCue then show fixation
-
-  //fixation cross uses variables to position relative to center
-  stroke(0);
-  strokeWeight(3);
-  line (centerX, centerY + 40, centerX, centerY-40);
-  line(centerX - 40, centerY, centerX + 40, centerY);
-
+ 
 
   //midpoint of canvas = (320, 240)
-
-
  
   //left rectangle
   fill(255, 255, 255);
@@ -149,8 +112,40 @@ void draw() {
   fill(255, 255, 255);
   rect(aRight + 250, b, c, d);
 
+ if (drawLeftProbeBool) {
+   //now = millis();
+          leftProbeTime();
+         noStroke();
+         fill(139, 139, 139);
+         rect(160, 210, 50, 50);
+         println("testing leftP");
+    
+     
+    }
+    
+    if (drawRightProbeBool) {
+      rightProbeTime();
+     //int passedTime = millis() - savedTime;
+      //while (passedTime < totalTime){
+          fill(139, 139, 139);
+          rect(425, 210, 50, 50);
+         
+               println("testing rightP");
+         
+    }
+   // drawRightProbeBool = false;
+  
+   
+ // } 
 
-
+//when the arrow is showing 
+if(showArrow == false){
+  //fixation cross uses variables to position relative to center
+  stroke(0);
+  strokeWeight(3);
+  line (centerX, centerY + 40, centerX, centerY-40);
+  line(centerX - 40, centerY, centerX + 40, centerY);
+}
   //declare myFont as a PFont
   PFont myFont = createFont("Arial", 24);
   textFont(myFont);
@@ -162,25 +157,7 @@ void draw() {
   text("Trial Number " + trialNumber +" : ", 15, 25);
 
 
-
-
     }
-    
-    
-
-
-
-
-//void leftP() {
-// if (key == '1'){
-//     noStroke();
-//     fill(139, 139, 139);
-//     rect(295, 80, 50, 50);
-//      probeVisiblity = true;
-//    
-// }
-//}
-
 
 
 //use push and pop when you are making a lot of style changes
