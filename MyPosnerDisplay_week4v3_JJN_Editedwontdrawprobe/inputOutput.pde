@@ -37,15 +37,50 @@ void keyPressed() {
     }
   }
   
-  if (key == 'b' || key == 'B'){
-    savedTime = millis();
-    getCued();
+  if (key == 'b' || key == 'B')
+  {
+     trialNumber += 1;
+   now = millis();
+   
+     savedTime = millis();
+   //keyB = true;
+   //println("start timing");
+  // now = millis();
+   //startCue = now + 500;
+   calculateTime();
+   //if( startCue  <= now && now <= endCue)
+   //{
+  // println("this is now" + now);
+   cuedBool = true;
+   getCued();
+   
+ // }
   }
+ //if (cuedBool && !istBool){
+ //getCued();
+ //cuedBool = false;
+  // }
+   
+    //cross = true;
+    
+     //  if (passedTime >= totalArrowTime){
+   //passedTime =- 5000;
+   
+   // calculateTime();
+    
+  
+ 
+ 
+  // }
+  
+  
+
+ // }
   
   if (key == 'c' || key == 'C'){
      savedTime = millis();
-     showArrow = true;
-     pickDirection();
+     //showArrow = true;
+    //pickDirection();
      
      // int passedTime = millis() - savedTime;
      //println(arrowDirection);

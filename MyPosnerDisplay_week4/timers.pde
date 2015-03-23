@@ -1,3 +1,20 @@
+void calculateTime(){
+  now = millis();
+  startCue = now + 2000;
+  endCue = startCue + cueDuration;
+  
+  startIst = endCue;
+  endIst = startIst + istDuration;
+  
+  startProbe = endIst;
+  endProbe = startProbe + probeDuration;
+  
+  
+  
+}
+
+
+
 void leftProbeTime(){
   
   passedTime = millis() - savedTime;
@@ -26,16 +43,16 @@ void rightProbeTime(){
       }
     }
     
- void arrowProbeTime(){
-  passedTime = millis() - savedTime;
-   
-  //if(passedTime <= totalTime){
-   showArrow = true;
-   //pickDirection();
- //  }
-   if(passedTime > totalTime) {
-     showArrow = false;
-      }
-    }
+// void arrowProbeTime(){
+//  passedTime = millis() - savedTime;
+//   
+//  //if(passedTime <= totalTime){
+//   showArrow = true;
+//   //pickDirection();
+// //  }
+//   if(passedTime > totalTime) {
+//     showArrow = false;
+//      }
+//    }
     
 

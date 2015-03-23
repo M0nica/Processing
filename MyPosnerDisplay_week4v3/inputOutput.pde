@@ -38,14 +38,30 @@ void keyPressed() {
   }
   
   if (key == 'b' || key == 'B'){
-    savedTime = millis();
-    getCued();
+   now = millis();
+   
+   keyB = true;
+   
+    //cross = true;
+    
+     //  if (passedTime >= totalArrowTime){
+   //passedTime =- 5000;
+   
+   // calculateTime();
+    
+  
+ 
+ 
+  // }
+  
+  
+
   }
   
   if (key == 'c' || key == 'C'){
      savedTime = millis();
-     showArrow = true;
-     pickDirection();
+     //showArrow = true;
+    //pickDirection();
      
      // int passedTime = millis() - savedTime;
      //println(arrowDirection);

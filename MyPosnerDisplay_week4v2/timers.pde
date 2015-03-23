@@ -39,3 +39,29 @@ void rightProbeTime(){
     }
     
 
+void fixationTime(){
+  passedTime = millis() - savedTime;
+
+//   
+//  //if(passedTime <= totalTime){
+//   showArrow = true;
+//   //pickDirection();
+// //  }
+//   if(passedTime > totalTime) {
+//     showArrow = false;
+//      }
+    }
+    
+    
+   void cuedTime(){
+  passedTime = millis() - savedTime;
+   
+  //if(passedTime <= totalTime){
+   cuedBool = true;
+   //pickDirection();
+ //  }
+   if(passedTime > totalTime) {
+     cuedBool = false;
+      }
+    }
+
