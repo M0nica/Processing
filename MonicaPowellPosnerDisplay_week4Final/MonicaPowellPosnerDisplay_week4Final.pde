@@ -1,6 +1,7 @@
 //canvas size
 //640px wide by 480px tall
 //this is a commonly used dimension
+int[] trialConditionOrder = new int[4];
 
 int aLeft = 150;
 int aRight = 150;
@@ -8,7 +9,7 @@ int b = 185;
 int c = 100;
 int d = 100;
 
-int trialNumber = 1;
+int trialNumber = 0;
 
 int centerX;
 int centerY;
@@ -40,6 +41,9 @@ int now;
 int passedTime;
 
 int savedTime;
+
+int numTrials;
+int condition;
 
 
 boolean lateMessage;
@@ -197,6 +201,7 @@ void draw() {
   drawRightProbeBool = false;
          // leftProbeTime();
           drawLeftProbe();
+          startNewTrial();
           
         
     }
@@ -206,6 +211,7 @@ void draw() {
      drawLeftProbeBool = false;
      // rightProbeTime();
      drawRightProbe();  
+     startNewTrial();
     
     }
    
@@ -268,7 +274,7 @@ if (keyB){
  if (probeBool  && !istBool){
  getProbe();
  probeBool = false;
-  trialNumber += 1;
+ // trialNumber += 1;
  }
 
  fill(0, 0, 255);
