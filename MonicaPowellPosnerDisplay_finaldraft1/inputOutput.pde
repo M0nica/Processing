@@ -55,6 +55,7 @@ void keyPressed() {
     //   
     numTrials = 0;
 
+    showSplashScreen = false;
 
     generateTrialList();
     cuedBool = true;
@@ -71,7 +72,7 @@ void keyPressed() {
         leftCued = true;
       
           newTrialTimer();
-         numTrials++;
+         //numTrials++;
       }
 
       if (condition == 1) {
@@ -81,7 +82,7 @@ void keyPressed() {
         leftCued = true;
         
            newTrialTimer();
-         numTrials++;
+         //numTrials++;
       }
 
 
@@ -92,7 +93,7 @@ void keyPressed() {
         rightCued = true;
        
           newTrialTimer();
-         numTrials++;
+         //numTrials++;
       }
 
 
@@ -103,7 +104,7 @@ void keyPressed() {
         rightCued = true;
       
           newTrialTimer();
-         numTrials++;
+         //numTrials++;
       }
    // }
     //getCued();

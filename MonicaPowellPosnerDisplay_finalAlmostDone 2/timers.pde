@@ -57,11 +57,12 @@ void leftProbeTime(){
      drawLeftProbeBool = true;
      leftRT = passedTime;
  //  }
-   if(passedTime >= totalTime) {
-     drawLeftProbeBool = false;
-     println("SETTING TO FALSE");
-      
-      }
+ //removed so that probe only turns off when users presses space 
+//   if(passedTime >= totalTime) {
+//     drawLeftProbeBool = false;
+//     println("SETTING TO FALSE");
+//      
+//      }
     }
     
     
@@ -73,10 +74,11 @@ void rightProbeTime(){
      drawRightProbeBool = true;
      rightRT = passedTime;
  //  }
-   if(passedTime >= totalTime) {
-     drawRightProbeBool = false;
-     println("SETTING TO FALSE");
-      }
+ //removed so that probe only turns off when users presses space 
+//   if(passedTime >= totalTime) {
+//     drawRightProbeBool = false;
+//     println("SETTING TO FALSE");
+//      }
     }
     
 // void arrowProbeTime(){

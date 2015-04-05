@@ -1,13 +1,24 @@
 //canvas size
 //640px wide by 480px tall
 //this is a commonly used dimension
-int[] trialConditionOrder = new int[4];
+
+int numTrialsPerCondition = 5;
+int numConditions = 12;
+int totalTrials = numConditions * numTrialsPerCondition;
+
+int[] trialConditionOrder = new int[totalTrials];
+
+int var3; // 0 = fixation cross/neutral, 1 = real duck, 2 = rubber duck
+int cueSide;
+int probeSide;
+
 
 int aLeft = 150;
 int aRight = 150;
 int b = 185;
 int c = 100;
 int d = 100;
+
 
 int trialNumber = 0;
 
@@ -55,7 +66,8 @@ boolean timerMessageLeft;
 boolean cross;
 boolean keyB;
 boolean istDone;
-
+boolean showSplashScreen;
+boolean restart;
 
 int cued;
 int probe;
@@ -84,16 +96,23 @@ int istDuration = 500;
 int startProbe;
 int endProbe;
 int probeDuration = 2000;
- 
 
+//int[] data;
 
-
-
+PImage flatDuck;
+PImage realDuck;
+PImage rubberDuck;
+ PrintWriter output;
 
 //setup is stuff that happens only one, draw happens
 //again and again in a loop (forever)
 void setup() {
   size (640, 480);
+   // Load text file as a string
+  //String[] stuff = loadStrings("SubjectData.txt");
+   //data = int(split(stuff[0],','));
+   
+    output = createWriter("SubjectData.txt"); 
   //background(139, 139, 139);
 
   //initialize variables, after setting canvas size
@@ -106,6 +125,13 @@ void setup() {
   lateMessage = false; 
   rightCued = false;
   leftCued = false;
+  showSplashScreen = true;
+  flatDuck = loadImage("flatDuck.jpeg");
+realDuck = loadImage("realDuck.jpg");
+rubberDuck = loadImage("rubberDuck.gif");
+ drawLeftProbeBool = false;
+ drawRightProbeBool = false;
+
   
 }
 
@@ -115,39 +141,31 @@ void draw() {
   
    now = millis();
    fixationCross();
-  getProbe();
-  
- //if (cuedBool){
-// getCued();
-// }
+
   rect(aLeft - 20, b, c, d);
   rect(aRight + 250, b, c, d);
   
   fill(255, 255, 255);
+  textSize(15);
+   text("Press the space bar when a grey square appears", 15,50);
   if (cuedBool)
   {
-    println("TRUE");
-    
-    
-      
-  //startIst = endCue;
- // endIst = startIst + istDuration;
    
     if( startCue <= now && now <= endCue)
     {
        if (leftCued){
-         //rightCued = false;
          stroke(0);
          strokeWeight(4);
          rect(aLeft - 20, b, c, d);
+         rightCued = false;
      
       //left rectangle
       }
       if (rightCued){
-     // leftCued = false;
       stroke(0);
       strokeWeight(4);
       rect(aRight + 250, b, c, d);
+      leftCued = false;
       }
   }
     
@@ -155,18 +173,9 @@ void draw() {
     {
       leftCued = false; //jjn
       rightCued = false; //jjn
-      println("ALL DONE WITH CUE");
       cuedBool = false;
     }
-    
-    // passedTime = millis() - savedTime;
-  /*
-    if(passedTime >= totalTime) {
-  
-    leftCued = false;
-    rightCued = false;
-    }
-   */ //jjn
+ 
   
   startIst = endCue;
   endIst = startIst + istDuration;
@@ -175,7 +184,7 @@ void draw() {
   
   if( startIst <= now && now <= endIst){
 
- println("IST time");
+
   istDone = true;
   }
   
@@ -184,40 +193,50 @@ void draw() {
   }
   
   
-  startProbe = endIst;
-  endProbe = startProbe + probeDuration;
-   
- //now = millis();
-// if(startProbe <= now && now <= endProbe){
-
-  if(istDone && startProbe <= now && now <= endProbe){
-
-    println("draw probe");
   
+    if(/*istDone &&*/ startProbe <= now)
+  {
+  
+    // println("draw probe");
     
- if (drawLeftProbeBool) {
-   //now = millis();
-
-//  drawRightProbeBool = false;
-         leftProbeTime();
-        //  drawLeftProbe();
-          println("DRAWING LEFT PROBE");
-          //startNewTrial();
-          
-        
-    }
     
-    if (drawRightProbeBool) {
+     if (drawLeftProbeBool) 
+     {
        
-   // drawLeftProbeBool = false;
-    // rightProbeTime();
-     drawRightProbe();  
-     println("DRAWING RIGHT PROBE");
-     //startNewTrial();
+       leftProbeTime();
+      drawLeftProbe();
+      
+      
+    
     
     }
+    
+    if (drawRightProbeBool) 
+    {
+
+      rightProbeTime();
+      drawRightProbe();  
+       
+     }
    
   }
+
+  
+//  if (drawLeftProbeBool && timerMessageLeft)
+//  {
+//    drawLeftProbeBool = false;
+//    startNewTrial();
+//   
+//  }
+//  
+//  if (drawRightProbeBool && timerMessageRight)
+//  {
+//    drawRightProbeBool = false;
+//    startNewTrial();
+//  }
+//  
+  
+  
    noStroke();
    
 
@@ -228,68 +247,50 @@ void draw() {
   
 
   noStroke();
+  
+  if (restart){
+  startNewTrial();
+  restart = false;
+}
     
    
   if (timerMessageRight && !drawRightProbeBool){
-   
+ //  restart = false;
  rightRTMessage();
- println("TRIALS OVER");
- startNewTrial();
+// println("TRIALS OVER");
+
   
 }
 
 if(timerMessageLeft && !drawLeftProbeBool){ pushStyle();
+//restart = false;
    leftRTMessage();
-   println("TRIALS OVER");
- startNewTrial();
-  }
-   
-//if( startCue <= now && now <= endCue){
-  // if( startCue  <= millis() && millis() <= endCue){
-//    println("this is now" + now);
-    
-//  cuedBool = true;
- // }
-  
-//  if(cross){
-  
-    fixationCross();
- 
-//}
+ //  println("TRIALS OVER");
 
-/*
-if (keyB){
-  now = millis();
-  startCue = now + 500;
- calculateTime();
- if( startCue  <= now && now <= endCue){
-    println("this is now" + now);
-    
-  cuedBool = true;
-  //getCued();
- 
   }
-}
- if (cuedBool && !istBool){
- //getCued();
- cuedBool = false;
-   }
+  
+  
    
-*/
+
+  
+  if (var3 == 0){
+    fixationCross();
+  }
+  
+  else {
+  duckies();
+}
  
- //if (probeBool  && !istBool){
- //getProbe();
- 
- //probeBool = false;
- 
- // trialNumber += 1;
-// }
+
 
  fill(0, 0, 255);
      text("Trial Number: " + numTrials, 15, 25);
      fill(255, 255, 255);
 
-
+if (showSplashScreen){ 
+background(139, 139, 139);
+text("Press 'E' to begin", 15, 25);
+}
     }
     
     

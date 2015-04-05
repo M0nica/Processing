@@ -7,21 +7,22 @@ void newTrialTimer(){
 
 void startNewTrial(){
 
-numTrials++;
+  
+//numTrials++;
 
 
 
 //generateTrialList();
     
 //increment the trialNumber after all 4 conditions have been cycled through
-  if (numTrials == 5){
-   trialNumber += 1;
- }
+ // if (numTrials == 5){
+  // trialNumber += 1;
+ //}
     
 if (numTrials < 4){
   //cuedBool = true;
       condition = trialConditionOrder[numTrials];
-     
+      
       
  //newTrialTimer();
       if (condition == 0) {
@@ -30,7 +31,9 @@ if (numTrials < 4){
          drawRightProbeBool = false;
         leftCued = true;
           newTrialTimer();
-         numTrials++;
+          numTrials++;
+     
+         //numTrials++;
       }
 
       if (condition == 1) {
@@ -40,6 +43,8 @@ if (numTrials < 4){
         leftCued = true;
          newTrialTimer();
          numTrials++;
+     
+        // numTrials++;
       }
 
 
@@ -50,6 +55,8 @@ if (numTrials < 4){
         rightCued = true;
          newTrialTimer();
          numTrials++;
+     
+        // numTrials++;
       }
 
 
@@ -60,6 +67,8 @@ if (numTrials < 4){
         rightCued = true;
          newTrialTimer();
          numTrials++;
+     
+     //    numTrials++;
       }
 }
       

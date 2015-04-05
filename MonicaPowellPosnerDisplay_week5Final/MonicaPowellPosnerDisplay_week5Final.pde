@@ -55,6 +55,7 @@ boolean timerMessageLeft;
 boolean cross;
 boolean keyB;
 boolean istDone;
+boolean showSplashScreen;
 
 
 int cued;
@@ -106,6 +107,7 @@ void setup() {
   lateMessage = false; 
   rightCued = false;
   leftCued = false;
+  showSplashScreen = true;
   
 }
 
@@ -115,7 +117,7 @@ void draw() {
   
    now = millis();
    fixationCross();
-  getProbe();
+   //getProbe(); commented out JJN
   
  //if (cuedBool){
 // getCued();
@@ -124,9 +126,11 @@ void draw() {
   rect(aRight + 250, b, c, d);
   
   fill(255, 255, 255);
+  textSize(15);
+   text("Press the space bar when a grey square appears", 15,50);
   if (cuedBool)
   {
-    println("TRUE");
+    //println("TRUE");
     
     
       
@@ -155,7 +159,7 @@ void draw() {
     {
       leftCued = false; //jjn
       rightCued = false; //jjn
-      println("ALL DONE WITH CUE");
+      //println("ALL DONE WITH CUE");
       cuedBool = false;
     }
     
@@ -175,7 +179,7 @@ void draw() {
   
   if( startIst <= now && now <= endIst){
 
- println("IST time");
+ //println("IST time");
   istDone = true;
   }
   
@@ -184,40 +188,79 @@ void draw() {
   }
   
   
-  startProbe = endIst;
-  endProbe = startProbe + probeDuration;
+  //startProbe = endIst;  //commented out JJN
+  //endProbe = startProbe + probeDuration; //commented out JJN
    
  //now = millis();
 // if(startProbe <= now && now <= endProbe){
 
-  if(istDone && startProbe <= now && now <= endProbe){
-
-    println("draw probe");
+  //if(/*istDone &&*/ startProbe <= now && now <= endProbe)
+    if(/*istDone &&*/ startProbe <= now)
+  {
   
+    // println("draw probe");
     
- if (drawLeftProbeBool) {
-   //now = millis();
-
-//  drawRightProbeBool = false;
-         leftProbeTime();
-        //  drawLeftProbe();
-          println("DRAWING LEFT PROBE");
-          //startNewTrial();
-          
-        
+    
+     if (drawLeftProbeBool) 
+     {
+       //now = millis();
+      
+      //  drawRightProbeBool = false;
+       leftProbeTime();
+      drawLeftProbe();
+      println("DRAWING LEFT PROBE");
+      //startNewTrial();
+    
+    
     }
     
-    if (drawRightProbeBool) {
+    if (drawRightProbeBool) 
+    {
        
-   // drawLeftProbeBool = false;
-    // rightProbeTime();
-     drawRightProbe();  
-     println("DRAWING RIGHT PROBE");
-     //startNewTrial();
-    
-    }
+       // drawLeftProbeBool = false;
+      rightProbeTime();
+       drawRightProbe();  
+       println("DRAWING RIGHT PROBE");
+       //startNewTrial();
+      
+     }
    
   }
+//  //  following two if-then's did the trick - JJN
+//  
+//  if (drawLeftProbeBool && endProbe < now)
+//  {
+//    drawLeftProbeBool = false;
+//    drawRightProbeBool = false;
+//    startNewTrial();
+//  }
+//  
+//  if (drawRightProbeBool && endProbe < now)
+//  {
+//    drawLeftProbeBool = false;
+//    drawRightProbeBool = false;
+//    startNewTrial();
+//  }
+
+//  following two if-then's did the trick - JJN
+  
+  if (drawLeftProbeBool && timerMessageLeft)
+  {
+    drawLeftProbeBool = false;
+    //drawRightProbeBool = false;
+    startNewTrial();
+   
+  }
+  
+  if (drawRightProbeBool && timerMessageRight)
+  {
+    //drawLeftProbeBool = false;
+    drawRightProbeBool = false;
+    startNewTrial();
+  }
+  
+  
+  
    noStroke();
    
 
@@ -289,7 +332,10 @@ if (keyB){
      text("Trial Number: " + numTrials, 15, 25);
      fill(255, 255, 255);
 
-
+if (showSplashScreen){ 
+background(139, 139, 139);
+text("Press 'E' to begin", 15, 25);
+}
     }
     
     

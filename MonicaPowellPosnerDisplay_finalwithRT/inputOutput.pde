@@ -48,63 +48,61 @@ void keyPressed() {
 
   if (key == 'e' || key == 'E')
   {
-    //   trialNumber += 1;
-    //   now = millis();
-    //   savedTime = millis();
-    //   calculateTime();
-    //   
+    
     numTrials = 0;
 
+    showSplashScreen = false;
 
     generateTrialList();
-    cuedBool = true;
+    //cuedBool = true;
+    //condition = trialConditionOrder[numTrials];
 
    // for (int i = 0; i < 4; i++) {
     
 
-      condition = trialConditionOrder[numTrials];
+     // condition = trialConditionOrder[numTrials];
 
-      if (condition == 0) {
-        cuedBool = true;
-        drawLeftProbeBool = true;
-         drawRightProbeBool = false;
-        leftCued = true;
-      
-          newTrialTimer();
-         numTrials++;
-      }
-
-      if (condition == 1) {
-        cuedBool = true;
-         drawLeftProbeBool = false;
-        drawRightProbeBool = true;
-        leftCued = true;
-        
-           newTrialTimer();
-         numTrials++;
-      }
-
-
-      if (condition == 2) {
-        cuedBool = true;
-         drawLeftProbeBool = false;
-        drawRightProbeBool = true;
-        rightCued = true;
-       
-          newTrialTimer();
-         numTrials++;
-      }
-
-
-      if (condition == 3) {
-        cuedBool = true;
-        drawRightProbeBool = false;
-        drawLeftProbeBool = true;
-        rightCued = true;
-      
-          newTrialTimer();
-         numTrials++;
-      }
+//      if (condition == 0) {
+//        cuedBool = true;
+//        drawLeftProbeBool = true;
+//         drawRightProbeBool = false;
+//        leftCued = true;
+//      
+//          newTrialTimer();
+//         //numTrials++;
+//      }
+//
+//      if (condition == 1) {
+//        cuedBool = true;
+//         drawLeftProbeBool = false;
+//        drawRightProbeBool = true;
+//        leftCued = true;
+//        
+//           newTrialTimer();
+//         //numTrials++;
+//      }
+//
+//
+//      if (condition == 2) {
+//        cuedBool = true;
+//         drawLeftProbeBool = false;
+//        drawRightProbeBool = true;
+//        rightCued = true;
+//       
+//          newTrialTimer();
+//         //numTrials++;
+//      }
+//
+//
+//      if (condition == 3) {
+//        cuedBool = true;
+//        drawRightProbeBool = false;
+//        drawLeftProbeBool = true;
+//        rightCued = true;
+//      
+//          newTrialTimer();
+//         //numTrials++;
+//      }
    // }
     //getCued();
   }
@@ -135,11 +133,13 @@ void keyPressed() {
     if (drawLeftProbeBool) {
       timerMessageLeft = true;
       drawLeftProbeBool = false;
+      restart = true;
     }
 
     if (drawRightProbeBool) {
       timerMessageRight = true;
       drawRightProbeBool = false;
+      restart = true;
     }
   }
 }
